@@ -3,6 +3,7 @@ import 'package:ie_tec_app/core/context/tb_context.dart';
 import 'package:ie_tec_app/core/context/tb_context_widget.dart';
 import 'package:ie_tec_app/generated/l10n.dart';
 import 'package:ie_tec_app/modules/alarm/alarms_page.dart';
+import 'package:ie_tec_app/modules/device/devices_list_page.dart';
 import 'package:ie_tec_app/modules/device/devices_main_page.dart';
 import 'package:ie_tec_app/modules/home/home_page.dart';
 import 'package:ie_tec_app/modules/more/more_page.dart';
@@ -23,9 +24,9 @@ class TbMainNavigationItem {
   static Map<Authority, Set<String>> mainPageStateMap = {
     Authority.SYS_ADMIN: Set.unmodifiable(['/home', '/more']),
     Authority.TENANT_ADMIN:
-        Set.unmodifiable(['/home', '/alarms', '/devices', '/more']),
+        Set.unmodifiable(['/home', '/alarms', '/more', '/deviceList']),
     Authority.CUSTOMER_USER:
-        Set.unmodifiable(['/home', '/alarms', '/devices', '/more']),
+        Set.unmodifiable(['/home', '/alarms', '/more', '/deviceList']),
   };
 
   static bool isMainPageState(TbContext tbContext, String path) {
@@ -57,11 +58,16 @@ class TbMainNavigationItem {
                 title: 'Alarms',
                 icon: Icon(Icons.notifications),
                 path: '/alarms'),
+            // TbMainNavigationItem(
+            //     page: DevicesMainPage(tbContext),
+            //     title: 'Devices',
+            //     icon: Icon(Icons.devices_other),
+            //     path: '/devices'),
             TbMainNavigationItem(
-                page: DevicesMainPage(tbContext),
-                title: 'Devices',
-                icon: Icon(Icons.devices_other),
-                path: '/devices')
+                page: DevicesListPage(tbContext),
+                title: 'Dispositivos',
+                icon: Icon(Icons.cast_connected),
+                path: '/deviceList')
           ]);
           break;
         case Authority.REFRESH_TOKEN:
@@ -92,9 +98,12 @@ class TbMainNavigationItem {
         case '/alarms':
           item.title = '${S.of(context).alarms}';
           break;
-        case '/devices':
-          item.title = '${S.of(context).devices}';
+        case '/deviceList':
+          item.title = 'Dispositivos';
           break;
+        // case '/devices':
+        //   item.title = '${S.of(context).devices}';
+        //   break;
         case '/more':
           item.title = '${S.of(context).more}';
           break;

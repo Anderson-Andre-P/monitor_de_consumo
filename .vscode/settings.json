@@ -1,6 +1,10 @@
 {
   // "git.enabled": false,
   "files.exclude": {
+    "android": true,
+    "ios": true,
+    "web": true,
+    "assets": true,
     ".vscode": false,
     ".gitignore": true,
     ".metadata": true,
@@ -12,11 +16,9 @@
     "pubspec.lock": true,
     "README.md": true,
     ".dart_tool": true,
-    "android": false,
-    "ios": true,
-    "assets": false,
     ".idea": true,
     ".github": true,
+    ".env_example": true,
     "monitorie_thingsboard.iml": true
   }
 }

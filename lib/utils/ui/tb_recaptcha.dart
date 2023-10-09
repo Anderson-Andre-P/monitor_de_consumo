@@ -88,11 +88,11 @@ class _TbRecaptchaState extends TbPageState<TbRecaptcha> {
                   });
             },
             onConsoleMessage: (controller, consoleMessage) {
-              log.debug(
-                  '[JavaScript console] ${consoleMessage.messageLevel}: ${consoleMessage.message}');
+              // log.debug(
+              //     '[JavaScript console] ${consoleMessage.messageLevel}: ${consoleMessage.message}');
             },
             onLoadStop: (controller, url) async {
-              log.debug('onLoadStop: $url');
+              // log.debug('onLoadStop: $url');
               if (webViewLoading) {
                 webViewLoading = false;
                 _webViewController.complete(controller);

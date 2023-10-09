@@ -6,7 +6,7 @@ import 'package:ie_tec_app/modules/device/devices_base.dart';
 import 'package:ie_tec_app/modules/device/devices_list.dart';
 import 'package:ie_tec_app/widgets/tb_app_bar.dart';
 
-class DevicesListPage extends TbPageWidget {
+class DevicesListPage extends TbContextWidget {
   final String? deviceType;
   final bool? active;
   final bool searchMode;
@@ -19,7 +19,7 @@ class DevicesListPage extends TbPageWidget {
   _DevicesListPageState createState() => _DevicesListPageState();
 }
 
-class _DevicesListPageState extends TbPageState<DevicesListPage> {
+class _DevicesListPageState extends TbContextState<DevicesListPage> {
   late final DeviceQueryController _deviceQueryController;
 
   @override
@@ -31,6 +31,7 @@ class _DevicesListPageState extends TbPageState<DevicesListPage> {
 
   @override
   Widget build(BuildContext context) {
+    // super.build(context);
     var devicesList = DevicesList(
       tbContext,
       _deviceQueryController,

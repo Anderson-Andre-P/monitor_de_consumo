@@ -230,7 +230,7 @@ class _DashboardState extends TbContextState<Dashboard> {
   }
 
   Future<void> tryLocalNavigation(String? path) async {
-    log.debug("path: $path");
+    // log.debug("path: $path");
     if (path != null) {
       var parts = path.split("/");
       if ([
@@ -292,14 +292,14 @@ class _DashboardState extends TbContextState<Dashboard> {
                           initialUrlRequest: URLRequest(url: _initialUrl),
                           initialOptions: options,
                           onWebViewCreated: (webViewController) {
-                            log.debug("onWebViewCreated");
+                            // log.debug("onWebViewCreated");
                             webViewController.addJavaScriptHandler(
                                 handlerName: "tbMobileDashboardLoadedHandler",
                                 callback: (args) async {
                                   bool hasRightLayout = args[0];
                                   bool rightLayoutOpened = args[1];
-                                  log.debug(
-                                      "Invoked tbMobileDashboardLoadedHandler: hasRightLayout: $hasRightLayout, rightLayoutOpened: $rightLayoutOpened");
+                                  // log.debug(
+                                  //     "Invoked tbMobileDashboardLoadedHandler: hasRightLayout: $hasRightLayout, rightLayoutOpened: $rightLayoutOpened");
                                   _dashboardController
                                       .onHasRightLayout(hasRightLayout);
                                   _dashboardController
@@ -310,8 +310,8 @@ class _DashboardState extends TbContextState<Dashboard> {
                                 handlerName: "tbMobileDashboardLayoutHandler",
                                 callback: (args) async {
                                   bool rightLayoutOpened = args[0];
-                                  log.debug(
-                                      "Invoked tbMobileDashboardLayoutHandler: rightLayoutOpened: $rightLayoutOpened");
+                                  // log.debug(
+                                  //     "Invoked tbMobileDashboardLayoutHandler: rightLayoutOpened: $rightLayoutOpened");
                                   _dashboardController
                                       .onRightLayoutOpened(rightLayoutOpened);
                                 });
@@ -319,8 +319,8 @@ class _DashboardState extends TbContextState<Dashboard> {
                                 handlerName:
                                     "tbMobileDashboardStateNameHandler",
                                 callback: (args) async {
-                                  log.debug(
-                                      "Invoked tbMobileDashboardStateNameHandler: $args");
+                                  // log.debug(
+                                  //     "Invoked tbMobileDashboardStateNameHandler: $args");
                                   if (args.isNotEmpty && args[0] is String) {
                                     if (widget._titleCallback != null) {
                                       widget._titleCallback!(args[0]);
@@ -330,23 +330,23 @@ class _DashboardState extends TbContextState<Dashboard> {
                             webViewController.addJavaScriptHandler(
                                 handlerName: "tbMobileNavigationHandler",
                                 callback: (args) async {
-                                  log.debug(
-                                      "Invoked tbMobileNavigationHandler: $args");
+                                  // log.debug(
+                                  //     "Invoked tbMobileNavigationHandler: $args");
                                   if (args.length > 0) {
                                     String? path = args[0];
                                     Map<String, dynamic>? params;
                                     if (args.length > 1) {
                                       params = args[1];
                                     }
-                                    log.debug("path: $path");
-                                    log.debug("params: $params");
+                                    // log.debug("path: $path");
+                                    // log.debug("params: $params");
                                     tryLocalNavigation(path);
                                   }
                                 });
                             webViewController.addJavaScriptHandler(
                                 handlerName: "tbMobileHandler",
                                 callback: (args) async {
-                                  log.debug("Invoked tbMobileHandler: $args");
+                                  // log.debug("Invoked tbMobileHandler: $args");
                                   return await widgetActionHandler
                                       .handleWidgetMobileAction(
                                           args, webViewController);
@@ -356,7 +356,7 @@ class _DashboardState extends TbContextState<Dashboard> {
                               (controller, navigationAction) async {
                             var uri = navigationAction.request.url!;
                             var uriString = uri.toString();
-                            log.debug('shouldOverrideUrlLoading $uriString');
+                            // log.debug('shouldOverrideUrlLoading $uriString');
                             if (Platform.isAndroid ||
                                 Platform.isIOS &&
                                     navigationAction.iosWKNavigationType ==
@@ -386,19 +386,19 @@ class _DashboardState extends TbContextState<Dashboard> {
                           },
                           onUpdateVisitedHistory:
                               (controller, url, androidIsReload) async {
-                            log.debug('onUpdateVisitedHistory: $url');
+                            // log.debug('onUpdateVisitedHistory: $url');
                             _dashboardController
                                 .onHistoryUpdated(controller.canGoBack());
                           },
                           onConsoleMessage: (controller, consoleMessage) {
-                            log.debug(
-                                '[JavaScript console] ${consoleMessage.messageLevel}: ${consoleMessage.message}');
+                            // log.debug(
+                            //     '[JavaScript console] ${consoleMessage.messageLevel}: ${consoleMessage.message}');
                           },
                           onLoadStart: (controller, url) async {
-                            log.debug('onLoadStart: $url');
+                            // log.debug('onLoadStart: $url');
                           },
                           onLoadStop: (controller, url) async {
-                            log.debug('onLoadStop: $url');
+                            // log.debug('onLoadStop: $url');
                             if (webViewLoading) {
                               webViewLoading = false;
                               _controller.complete(controller);
@@ -406,8 +406,8 @@ class _DashboardState extends TbContextState<Dashboard> {
                           },
                           androidOnPermissionRequest:
                               (controller, origin, resources) async {
-                            log.debug(
-                                'androidOnPermissionRequest origin: $origin, resources: $resources');
+                            // log.debug(
+                            //     'androidOnPermissionRequest origin: $origin, resources: $resources');
                             return PermissionRequestResponse(
                                 resources: resources,
                                 action: PermissionRequestResponseAction.GRANT);

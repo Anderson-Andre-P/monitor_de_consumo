@@ -443,7 +443,7 @@ class _SignUpPageState extends TbPageState<SignUpPage> {
             _isSignUpNotifier.value = false;
             _promptToResendEmailVerification(formValue['email']);
           } else {
-            log.info('Sign up success!');
+            // log.info('Sign up success!');
             _isSignUpNotifier.value = false;
             _recaptchaResponseNotifier.value = null;
             navigateTo('/signup/emailVerification?email=' + formValue['email']);
@@ -495,7 +495,7 @@ class _SignUpPageState extends TbPageState<SignUpPage> {
       await tbClient
           .getSignupService()
           .resendEmailActivation(email, pkgName: tbContext.packageName);
-      log.info('Resend email activation!');
+      // log.info('Resend email activation!');
       navigateTo('/signup/emailVerification?email=' + email);
     }
   }

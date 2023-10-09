@@ -185,7 +185,7 @@ class TbContext {
         final initialUri = await getInitialUri();
         _updateInitialNavigation(initialUri);
       } catch (e) {
-        log.error('Failed to get initial uri: $e', e);
+        // log.error('Failed to get initial uri: $e', e);
       }
       await tbClient.init();
       if (UniversalPlatform.isAndroid || UniversalPlatform.isIOS) {
@@ -193,11 +193,11 @@ class TbContext {
           _updateInitialNavigation(uri);
           handleInitialNavigation();
         }, onError: (e) {
-          log.error('Failed to get new initial uri: $e', e);
+          // log.error('Failed to get new initial uri: $e', e);
         });
       }
-    } catch (e, s) {
-      log.error('Failed to init tbContext: $e', e, s);
+    } catch (e) {
+      // log.error('Failed to init tbContext: $e', e, s);
     }
   }
 
@@ -207,7 +207,7 @@ class TbContext {
       if (initialUri.hasQuery) {
         _initialNavigation = '$_initialNavigation?${initialUri.query}';
       }
-      log.debug('Initial navigation: $_initialNavigation');
+      // log.debug('Initial navigation: $_initialNavigation');
     }
   }
 
@@ -216,7 +216,7 @@ class TbContext {
   }
 
   void onError(ThingsboardError tbError) {
-    log.error('onError', tbError, tbError.getStackTrace());
+    // log.error('onError', tbError, tbError.getStackTrace());
     showErrorNotification(tbError.message!);
   }
 
@@ -280,18 +280,18 @@ class TbContext {
   }
 
   void onLoadStarted() {
-    log.debug('On load started.');
+    // log.debug('On load started.');
     _isLoadingNotifier.value = true;
   }
 
   void onLoadFinished() {
-    log.debug('On load finished.');
+    // log.debug('On load finished.');
     _isLoadingNotifier.value = false;
   }
 
   Future<void> onUserLoaded() async {
     try {
-      log.debug('onUserLoaded: isAuthenticated=${tbClient.isAuthenticated()}');
+      // log.debug('onUserLoaded: isAuthenticated=${tbClient.isAuthenticated()}');
       isUserLoaded = true;
       if (tbClient.isAuthenticated() && !tbClient.isPreVerificationToken()) {
         // log.debug('Data: ${tbClient.getAuthUser()}');
@@ -321,7 +321,7 @@ class TbContext {
         }
       } else {
         if (tbClient.isPreVerificationToken()) {
-          log.debug('authUser: ${tbClient.getAuthUser()}');
+          // log.debug('authUser: ${tbClient.getAuthUser()}');
           twoFactorAuthProviders = await tbClient
               .getTwoFactorAuthService()
               .getAvailableLoginTwoFaProviders();
@@ -341,8 +341,8 @@ class TbContext {
           tbClient.isAuthenticated() && !tbClient.isPreVerificationToken();
       await wlService.updateWhiteLabeling();
       await updateRouteState();
-    } catch (e, s) {
-      log.error('Error: $e', e, s);
+    } catch (e) {
+      // log.error('Error: $e', e, s);
       if (_isConnectionError(e)) {
         var res = await confirm(
             title: 'Connection error',

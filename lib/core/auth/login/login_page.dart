@@ -416,7 +416,7 @@ class _LoginPageState extends TbPageState<LoginPage> {
         showErrorNotification(result.error!);
       }
     } catch (e) {
-      log.error('Auth Error:', e);
+      // log.error('Auth Error:', e);
       _isLoginNotifier.value = false;
     }
   }
