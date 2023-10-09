@@ -22,9 +22,6 @@ jobs:
           java-version: 11
           distribution: temurin
 
-      - name: Run Flutter Doctor
-        run: flutter doctor
-
       - name: Get Packages
         run: flutter pub get
 
