@@ -1,4 +1,3 @@
-import 'package:ie_tec_app/constants/app_constants.dart';
 
 abstract class SignUpAppSecretProvider {
   Future<String> getSignUpAppSecret();
